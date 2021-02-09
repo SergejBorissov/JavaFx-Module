@@ -1,0 +1,56 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application{
+
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("StackedArea - Chart");
+
+
+        NumberAxis xAxis = new NumberAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        StackedAreaChart<Number, Number> chart = new StackedAreaChart<>(xAxis, yAxis);
+
+        XYChart.Series<Number, Number> series1 = new XYChart.Series<Number, Number>();
+        XYChart.Data<Number, Number> data1 = new XYChart.Data<Number, Number>(10, 14);
+        XYChart.Data<Number, Number> data2 = new XYChart.Data<Number, Number>(23, 32);
+        XYChart.Data<Number, Number> data3 = new XYChart.Data<Number, Number>(30, 23);
+        series1.getData().addAll(data1,data2, data3);
+        series1.setName("Borissov-2021");
+        
+        XYChart.Series<Number, Number> series2 = new XYChart.Series<Number, Number>();
+        XYChart.Data<Number, Number> data4 = new XYChart.Data<Number, Number>(24, 14);
+        XYChart.Data<Number, Number> data5 = new XYChart.Data<Number, Number>(20, 32);
+        XYChart.Data<Number, Number> data6 = new XYChart.Data<Number, Number>(3, 23);
+        series2.getData().addAll(data4,data5, data6);
+        series2.setName("Borissov-2020");
+
+
+        //Macht einen Unterschied, ob ich erst erst series1 oder series2 adde
+        chart.getData().add(series1);
+        chart.getData().add(series2);
+
+
+
+
+        primaryStage.setScene(new Scene(chart));
+
+        primaryStage.show();
+
+    }
+}
