@@ -1,0 +1,46 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application{
+
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Area - Chart");
+
+        //Für Strings eine Achse
+        CategoryAxis xAxis = new CategoryAxis();
+
+        //Für Zahlen eine Achse
+        NumberAxis yAxis = new NumberAxis();
+
+        AreaChart<String, Number> areaChart = new AreaChart<String, Number>(xAxis, yAxis);
+
+        XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
+        XYChart.Data<String, Number> data1 = new XYChart.Data<String, Number>("VarianteA", 14);
+        XYChart.Data<String, Number> data2 = new XYChart.Data<String, Number>("VarianteB", 32);
+        XYChart.Data<String, Number> data3 = new XYChart.Data<String, Number>("VarianteC", 23);
+        series1.getData().addAll(data1,data2, data3);
+        series1.setName("Borissov");
+        areaChart.getData().add(series1);
+
+        // Parents kann man direkt in die Stage packen
+
+        primaryStage.setScene(new Scene(areaChart));
+
+        primaryStage.show();
+
+    }
+}
