@@ -1,0 +1,57 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ * Nodes Transparent machen
+ */
+
+public class Main extends Application{
+
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Nihilistisches Fenster");
+
+        VBox parent = new VBox();
+
+        Slider slider = new Slider();
+        slider.setMax(300);
+
+        Slider slider2 = new Slider();
+        slider2.setMax(300);
+        parent.getChildren().add(slider2);
+        parent.getChildren().add(slider);
+
+        Button button = new Button("Beweg dich");
+        parent.getChildren().add(button);
+
+        Label output = new Label("Eingabe");
+        parent.getChildren().add(output);
+
+        output.textProperty().bind(slider.valueProperty().asString());
+
+       // output.translateYProperty().bind(slider.valueProperty());
+        button.translateYProperty().bind(slider.valueProperty());
+        button.translateXProperty().bind(slider2.valueProperty());
+
+        Scene scene = new Scene(parent,500,500);
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+
+    }
+}
