@@ -1,0 +1,49 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application{
+
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Bar - Chart");
+
+        //Für Strings eine Achse
+        CategoryAxis xAxis = new CategoryAxis();
+
+
+        //Für Zahlen eine Achse
+        NumberAxis yAxis = new NumberAxis();
+
+        BarChart<String, Number> barChart = new BarChart<String, Number>(xAxis, yAxis);
+
+        XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
+        XYChart.Data<String, Number> data1 = new XYChart.Data<String, Number>("VarianteA", 14);
+        XYChart.Data<String, Number> data2 = new XYChart.Data<String, Number>("VarianteB", 32);
+        series1.getData().addAll(data1,data2);
+        series1.setName("Borissov");
+        barChart.getData().add(series1);
+
+        // Parents kann man direkt in die Stage packen
+
+        primaryStage.setScene(new Scene(barChart));
+
+        primaryStage.show();
+
+    }
+}
