@@ -1,0 +1,63 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.beans.binding.DoubleBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application{
+
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Nihilistisches Fenster");
+
+        VBox parent = new VBox();
+        parent.setMaxSize(300,500);
+
+        Slider slider = new Slider();
+        slider.setMin(-200);
+        slider.setMax(200);
+        parent.getChildren().add(slider);
+
+        Slider slider2 = new Slider();
+        slider.setMin(-300);
+        slider.setMax(300);
+        parent.getChildren().add(slider2);
+
+        Button button = new Button("Breite");
+        button.setMinHeight(45);
+        button.setMaxHeight(70);
+        parent.getChildren().add(button);
+
+
+        Label output = new Label("Eingabe");
+        parent.getChildren().add(output);
+
+        output.textProperty().bind(slider.valueProperty().asString());
+
+        button.prefWidthProperty().bind(slider.valueProperty());
+        button.prefHeightProperty().bind(slider2.valueProperty());
+
+        Scene scene = new Scene(parent,500,500);
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+
+    }
+}
