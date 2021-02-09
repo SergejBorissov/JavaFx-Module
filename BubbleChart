@@ -1,0 +1,44 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application{
+
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Bubble - Chart");
+
+
+        NumberAxis xAxis = new NumberAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        BubbleChart<Number, Number> bubbleChart = new BubbleChart<Number, Number>(xAxis, yAxis);
+        XYChart.Series<Number, Number> series1 = new XYChart.Series<Number, Number>();
+        //extraValue definiert die größe der Bubbles
+        XYChart.Data<Number, Number> data1 = new XYChart.Data<Number, Number>(1, 14,3);
+        XYChart.Data<Number, Number> data2 = new XYChart.Data<Number, Number>(2, 32, 6);
+        XYChart.Data<Number, Number> data3 = new XYChart.Data<Number, Number>(3, 23,8);
+        series1.getData().addAll(data1,data2, data3);
+        series1.setName("Borissov");
+        bubbleChart.getData().add(series1);
+
+        // Parents kann man direkt in die Stage packen
+
+        primaryStage.setScene(new Scene(bubbleChart));
+
+        primaryStage.show();
+
+    }
+}
