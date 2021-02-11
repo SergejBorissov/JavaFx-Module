@@ -1,0 +1,64 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+/**
+ * @author Sergej Borissov
+ * BarCHart mit Slider und Listener
+ * dynamisch binden
+ */
+
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        primaryStage.setTitle("BarChart werrt mit Slider binden");
+        Pane pane = new Pane();
+
+        Slider slider = new Slider();
+        slider.setMax(100);
+        slider.setMin(-100);
+
+
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+
+        XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
+        XYChart.Data<String, Number> data1 = new XYChart.Data<String, Number>("VarianteA", 0);
+        series1.getData().add(data1);
+        barChart.getData().add(series1);
+
+        pane.getChildren().add(barChart);
+        pane.getChildren().add(slider);
+
+
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                data1.YValueProperty().bind(slider.valueProperty());
+                System.out.println(newValue);
+            }
+        });
+
+        
+        primaryStage.setScene(new Scene(pane));
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
