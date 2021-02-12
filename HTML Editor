@@ -1,0 +1,111 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.*;
+import javafx.scene.web.HTMLEditor;
+import javafx.stage.Stage;
+
+/**
+ * @author Sergej Borissov
+ *HTML
+ *
+ */
+
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        primaryStage.setTitle("HTML-Editor");
+
+
+        VBox vBox = new VBox();
+
+        HTMLEditor htmlEditor = new HTMLEditor();
+        vBox.getChildren().add(htmlEditor);
+
+        System.out.println(htmlEditor.getHtmlText());
+
+
+        primaryStage.setScene(new Scene(vBox));
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+-----------------------------
+
+
+// Mustercode für build.gradle
+plugins {
+    id 'java'
+    // add
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+// add
+mainClassName = 'testFx.Main'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+
+// add
+javafx {
+    version = "11"
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.web' ]
+}
+
+
+----------------------------
+
+package testFx;
+
+
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+}
+
+
+
+-------------------------
+
+
+<?import javafx.scene.layout.VBox?>
+
+<VBox>
+
+</VBox>
+
+
+
+-------------------------------
+
+
+
