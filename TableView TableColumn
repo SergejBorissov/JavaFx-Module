@@ -1,0 +1,52 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+
+
+/**
+ * @author Sergej Borissov
+ *
+ *  TableView / TableColumn
+ */
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        primaryStage.setTitle("TableView / TableColumn");
+
+        BorderPane borderPane = new BorderPane();
+
+        TableView<Node> table = new TableView<Node>();
+        table.setItems(borderPane.getChildren());
+        table.setId("Tabelle");
+
+        borderPane.setBottom(new Button("Lade Daten"));
+
+        TableColumn<Node,String> opacityColumn = new TableColumn<Node, String>("Transparenz");
+        opacityColumn.setCellValueFactory(new PropertyValueFactory<Node, String>("opacity"));
+        table.getColumns().add(opacityColumn);
+
+        TableColumn<Node, String> idColumn = new TableColumn<Node, String>("ID");
+        idColumn.setCellValueFactory(new PropertyValueFactory<Node, String>("id"));
+        table.getColumns().add(idColumn);
+
+        borderPane.setCenter(table);
+
+        primaryStage.setScene(new Scene(borderPane));
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
