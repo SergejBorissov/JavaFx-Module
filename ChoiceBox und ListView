@@ -1,0 +1,51 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.*;
+import javafx.scene.web.HTMLEditor;
+import javafx.stage.Stage;
+
+/**
+ * @author Sergej Borissov
+ *COLOR PICKER
+ *
+ */
+
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        primaryStage.setTitle("ChoiceBox und ListView");
+
+
+        VBox vBox = new VBox();
+        TextArea textArea = new TextArea();
+
+        ChoiceBox<String> choiceBox = new ChoiceBox();
+        /* ObservableList ist eigentlich ein Interface,
+        aber mit FXCollections kann man es direkt implementieren
+         */
+        choiceBox.setItems(FXCollections.observableArrayList("Sachbuch", "Novelle", "Bibel"));
+       
+        /*textArea.textProperty().bind(choiceBox.getSelectionModel().selectedItemProperty());
+        ist das selbe wie:
+        textArea.textProperty().bind(choiceBox.valueProperty());
+         */
+        vBox.getChildren().addAll(choiceBox,textArea);
+
+
+        primaryStage.setScene(new Scene(vBox));
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
