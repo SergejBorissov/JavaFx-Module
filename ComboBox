@@ -1,0 +1,50 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+
+
+
+/**
+ * @author Sergej Borissov
+ * ComboBox:
+ *  - hat auch eine Scrollfunktion
+ *  - textfeld moeglich
+ *  -
+ */
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        primaryStage.setTitle("ComboBox");
+
+        HBox hBox = new HBox();
+        TextArea textArea = new TextArea();
+
+        ObservableList<String> data = FXCollections.observableArrayList("A","B","C");
+
+        ComboBox<String> comboBox = new ComboBox<>();
+        comboBox.setItems(data);
+
+        comboBox.setEditable(true);
+ 
+        hBox.getChildren().addAll(comboBox,textArea);
+
+         textArea.textProperty().bind(comboBox.valueProperty());
+         
+        primaryStage.setScene(new Scene(hBox));
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
