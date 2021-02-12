@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Sergej Borissov
- *  CHoiceBox and ListView
+ *  CHoiceBox
  *
  */
 
@@ -22,7 +22,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("ChoiceBox und ListView");
+        primaryStage.setTitle("ChoiceBox");
 
 
         VBox vBox = new VBox();
