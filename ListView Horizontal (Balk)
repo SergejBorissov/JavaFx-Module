@@ -1,0 +1,42 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.geometry.Orientation;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.web.HTMLEditor;
+import javafx.stage.Stage;
+
+/**
+ * @author Sergej Borissov
+ * ListView - Horizontal (Wie Balken)
+ *
+ */
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        primaryStage.setTitle("ListView");
+
+        VBox vBox = new VBox();
+        TextArea zeigWasAugsewaehlt = new TextArea();
+
+        ListView<String> listView = new ListView<String>();
+        listView.setOrientation(Orientation.HORIZONTAL);
+        listView.setItems(FXCollections.observableArrayList("Gedichte","Romane", "Novelle"));
+        vBox.getChildren().addAll(listView, zeigWasAugsewaehlt);
+
+
+        zeigWasAugsewaehlt.textProperty().bind(listView.selectionModelProperty().get().selectedItemProperty());
+
+        primaryStage.setScene(new Scene(vBox));
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
