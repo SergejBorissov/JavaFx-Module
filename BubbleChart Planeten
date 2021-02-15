@@ -1,0 +1,47 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.stage.Stage;
+
+
+
+public class Main extends Application{
+
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Bubble - Chart - Astronomie");
+
+        double SCALING_FACTOR = 2.5;
+        final NumberAxis xAxis = new NumberAxis("Entfernung zur Sonne", 0,5000,500);
+        final NumberAxis yAxis = new NumberAxis("Einwohnerzahl (Millionen)",-500,7000,1000);
+
+        final BubbleChart<Number, Number> bubbleChart = new BubbleChart<Number, Number>(xAxis,yAxis);
+
+        XYChart.Series merkur = new XYChart.Series("Merkur", FXCollections.observableArrayList(new XYChart.Data
+                                                                                                       (58,0,4.8*SCALING_FACTOR)));
+        XYChart.Series venus = new XYChart.Series("Venus", FXCollections.observableArrayList(new XYChart.Data(108,0,12.4*SCALING_FACTOR)));
+        XYChart.Series erde = new XYChart.Series("Erde", FXCollections.observableArrayList(new XYChart.Data(150,6800,12.7*SCALING_FACTOR)));
+        XYChart.Series mars = new XYChart.Series("Mars", FXCollections.observableArrayList(new XYChart.Data(280,0,6.8*SCALING_FACTOR)));
+        XYChart.Series jupiter = new XYChart.Series("Jupiter", FXCollections.observableArrayList(new XYChart.Data(775,0,142.8*SCALING_FACTOR)));
+        XYChart.Series saturn = new XYChart.Series("Saturn", FXCollections.observableArrayList(new XYChart.Data(440,0,120.8*SCALING_FACTOR)));
+        XYChart.Series uranus = new XYChart.Series("Uranus", FXCollections.observableArrayList(new XYChart.Data(2870,0,47.6*SCALING_FACTOR)));
+        XYChart.Series neptun = new XYChart.Series("Neptun", FXCollections.observableArrayList(new XYChart.Data(4500,0,44.6*SCALING_FACTOR)));
+        bubbleChart.getData().addAll(mars,merkur,venus,erde,saturn,uranus,jupiter,neptun);
+
+
+        primaryStage.setScene(new Scene(bubbleChart));
+
+        primaryStage.show();
+
+    }
+}
