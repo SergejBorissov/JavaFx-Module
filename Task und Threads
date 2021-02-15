@@ -51,8 +51,8 @@ public class Main extends Application{
             @Override
             public void handle(ActionEvent event) {
                 textArea.textProperty().bind(
-                        Bindings.concat("Progress",
-                                        task.progressProperty().multiply(100),"%"));
+                        Bindings.concat("Progress:  ",
+                                        task.progressProperty().multiply(100)," %"));
                 Thread thread = new Thread(task);
                 thread.start();
 
