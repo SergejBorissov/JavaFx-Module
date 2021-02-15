@@ -1,0 +1,44 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.scene.Scene;
+import javafx.scene.chart.*;
+import javafx.stage.Stage;
+
+
+/**
+ * @author Sergej Borissov
+ * 
+ * PieChart
+ */
+
+
+public class Main extends Application{
+
+
+    public static void main(String[] args) {
+
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Bubble - Chart");
+
+        PieChart pieChart = new PieChart(FXCollections.observableArrayList(
+           new PieChart.Data("Wandern",22),
+           new PieChart.Data("Fahrrad", 23),
+           new PieChart.Data("Kraftsport",33)
+        ));
+
+        pieChart.setId("Wasn das");
+        pieChart.setTitle("Sportarten");
+
+        primaryStage.setScene(new Scene(pieChart));
+
+        primaryStage.show();
+
+    }
+}
