@@ -1,0 +1,107 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.stage.Stage;
+
+
+
+
+public class Main extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Callbacks");
+
+        TableView<Person> table = new TableView<Person>();
+        table.getItems().add(new Person("Sto", "Krates"));
+        table.getItems().add(new Person("Schop", "Hauer"));
+
+        TableColumn<Person, String> firstNameColumn = new TableColumn<>("Vorname");
+        TableColumn<Person, String> lastNameColumn = new TableColumn<>("Nachname");
+
+        table.getColumns().add(firstNameColumn);
+        table.getColumns().add(lastNameColumn);
+
+        primaryStage.setScene(new Scene(table));
+        primaryStage.show();
+
+
+
+
+    }
+}
+
+-----------------------------
+
+
+package testFx;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+public class Person {
+
+    private StringProperty name;
+    private StringProperty lastName;
+
+    public Person(String name, String lastName){
+        this.name = new SimpleStringProperty(name);
+        this.lastName = new SimpleStringProperty(lastName);
+    }
+
+    public StringProperty nameProperty(){
+        return name;
+    }
+
+    public StringProperty lastNameProperty(){
+        return lastName;
+    }
+
+    public String getName(){
+        return name.get();
+    }
+
+    public String getLastName(){
+        return lastName.get();
+    }
+
+    public void setName(String name){
+        this.name.set(name);
+    }
+
+    public void setLastName(String lastName){
+        this.lastName.set(lastName);
+    }
+
+}
+
+
+----------------------------------
+
+package testFx;
+
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+}
+
+---------------------
+
+
+
+
