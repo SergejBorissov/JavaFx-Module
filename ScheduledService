@@ -1,0 +1,81 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+
+
+public class Main extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Scheduled Service");
+
+        Button button = new Button("Klicken");
+        primaryStage.setScene(new Scene(button));
+        primaryStage.show();
+
+        ScheduledService<Integer> service = new ScheduledService<Integer>() {
+            @Override
+            protected Task<Integer> createTask() {
+                return  new Task<Integer>() {
+                    @Override
+                    protected Integer call() throws Exception {
+                        System.out.println("Hallo Hölle");
+                        return 0;
+                    }
+                };
+            }
+        };
+
+        service.setPeriod(Duration.seconds(1));
+        //service.setDelay(Duration.seconds(3));
+        service.start();
+    }
+}
+
+
+---------------------------
+
+
+package testFx;
+
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+}
+
+---------------------------
+
+<?import javafx.scene.layout.VBox?>
+
+<VBox>
+
+</VBox>
+
+
+
+
+
+
+
+
+
+
