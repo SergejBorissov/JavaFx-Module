@@ -1,0 +1,158 @@
+package testFx;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+
+
+
+public class Main extends Application {
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        primaryStage.setTitle("Callbacks");
+
+        TableView<Person> table = new TableView<Person>();
+        table.getItems().add(new Person("Sto", "Krates"));
+        table.getItems().add(new Person("Schop", "Hauer"));
+
+        TableColumn<Person, TextField> firstNameColumn = new TableColumn<>("Vorname");
+        firstNameColumn.setCellValueFactory(new TextFieldValueFactory<Person>(person -> person.nameProperty()));
+
+        TableColumn<Person, TextField> lastNameColumn = new TableColumn<>("Nachname");
+        lastNameColumn.setCellValueFactory(new TextFieldValueFactory<Person>(person -> person.lastNameProperty()));
+
+        table.getColumns().add(firstNameColumn);
+        table.getColumns().add(lastNameColumn);
+
+        primaryStage.setScene(new Scene(table));
+        primaryStage.show();
+
+    }
+
+
+    public String myFunction(Object o){
+        return o.toString();
+    }
+}
+
+
+---------------------------------
+
+package testFx;
+
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TextField;
+import javafx.util.Callback;
+
+public class TextFieldValueFactory<T> implements Callback<TableColumn.CellDataFeatures<T, TextField>, ObservableValue<TextField>>{
+
+
+    private Callback<T, Property<String>> callback;
+
+    public TextFieldValueFactory(Callback<T, Property<String>> call){
+        this.callback = call;
+    }
+
+    @Override
+    public ObservableValue<TextField> call(TableColumn.CellDataFeatures<T, TextField> param) {
+        TextField textField = new TextField();
+        textField.textProperty().bindBidirectional(callback.call(param.getValue()));
+        return new SimpleObjectProperty<TextField>(textField);
+    }
+}
+
+
+------------------------
+
+package testFx;
+
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Controller implements Initializable {
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+}
+
+----------------------------
+
+package testFx;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+public class Person {
+
+    private StringProperty name;
+    private StringProperty lastName;
+
+    public Person(String name, String lastName){
+        this.name = new SimpleStringProperty(name);
+        this.lastName = new SimpleStringProperty(lastName);
+    }
+
+    public StringProperty nameProperty(){
+        return name;
+    }
+
+    public StringProperty lastNameProperty(){
+        return lastName;
+    }
+
+    public String getName(){
+        return name.get();
+    }
+
+    public String getLastName(){
+        return lastName.get();
+    }
+
+    public void setName(String name){
+        this.name.set(name);
+    }
+
+    public void setLastName(String lastName){
+        this.lastName.set(lastName);
+    }
+
+}
+
+
+-----------------------------
+
+<?import javafx.scene.layout.VBox?>
+
+<VBox>
+
+</VBox>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
