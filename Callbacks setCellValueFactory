@@ -28,6 +28,24 @@ public class Main extends Application {
 
         TableColumn<Person, TextField> lastNameColumn = new TableColumn<>("Nachname");
         lastNameColumn.setCellValueFactory(new TextFieldValueFactory<Person>(person -> person.lastNameProperty()));
+        
+        
+        
+        /*
+        
+        //Oder so:
+        
+        TableColumn<Person, String> firstNameColumn = new TableColumn<>("Vorname");
+        //firstNameColumn.setCellValueFactory(new TextFieldValueFactory<Person>(person -> person.nameProperty()));
+        firstNameColumn.setCellValueFactory(data -> data.getValue().nameProperty());
+
+
+        TableColumn<Person, String> lastNameColumn = new TableColumn<>("Nachname");
+        //lastNameColumn.setCellValueFactory(new TextFieldValueFactory<Person>(person -> person.lastNameProperty()));
+        firstNameColumn.setCellValueFactory(data -> data.getValue().lastNameProperty());
+
+
+         */
 
         table.getColumns().add(firstNameColumn);
         table.getColumns().add(lastNameColumn);
