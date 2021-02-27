@@ -1,0 +1,78 @@
+package fxMockUps;
+
+import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Mock-Ups-For-Show");
+
+        VBox vBox = new VBox();
+        Slider slider = new Slider();
+        ZufallsZahl zufallsZahl = new ZufallsZahl();
+
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis,yAxis);
+
+        XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
+        XYChart.Data<String, Number> laufzeit1 = new XYChart.Data<>("Laufzeit1: ", 0);
+        XYChart.Data<String, Number> laufzeit2 = new XYChart.Data<>("Laufzeit2: ", zufallsZahl.numberPlay());
+        XYChart.Data<String, Number> laufzeit3 = new XYChart.Data<>("Laufzeit3: ", zufallsZahl.numberPlay());
+        XYChart.Data<String, Number> laufzeit4 = new XYChart.Data<>("Laufzeit4: ", zufallsZahl.numberPlay());
+        series1.getData().addAll(laufzeit1,laufzeit2, laufzeit3, laufzeit4);
+
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                laufzeit1.YValueProperty().bind(slider.valueProperty());
+            }
+        });
+
+        lineChart.getData().add(series1);
+        vBox.getChildren().addAll(lineChart,slider);
+
+        primaryStage.setScene(new Scene(vBox));
+        primaryStage.show();
+
+
+
+
+    }
+}
+
+
+-----------------------
+
+
+package fxMockUps;
+
+
+import java.util.Random;
+
+public class ZufallsZahl {
+
+    public int numberPlay(){
+        Random random = new Random();
+        return random.nextInt(100);
+    }
+
+}
+
+-------------------
