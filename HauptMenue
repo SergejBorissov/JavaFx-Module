@@ -1,0 +1,72 @@
+package hauptMenu;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Stage;
+
+public class HauptMenu extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        VBox root = new VBox();
+        root.setAlignment(Pos.CENTER);
+        root.setStyle("-fx-background-color: #244c92;");
+
+        Text text = new Text("Spielfeldgröße");
+        text.setFill(Color.WHITE);
+        text.setWrappingWidth(100);
+        text.setTextAlignment(TextAlignment.CENTER);
+
+        Slider slider = new Slider(0, 1, .5);
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(slider);
+
+        root.setSpacing(10);
+        root.setPadding(new Insets(15,20, 10,10));
+
+        Button buttonStart= new Button("Start");
+        buttonStart.setPrefSize(100,100);
+        root.getChildren().add(buttonStart);
+
+        StartPart startPart = new StartPart();
+        buttonStart.setOnAction(e -> {
+            startPart.gebeRaus();
+        });
+
+        Button buttonExit = new Button("Beenden");
+        buttonExit.setPrefSize(100, 100);
+        root.getChildren().add(buttonExit);
+        buttonExit.setOnAction(event -> {
+            System.exit(0);
+        });
+
+        TextField textName1 = new TextField("Name Spieler 1");
+        textName1.setPrefWidth(110);
+
+        TextField textName2 = new TextField("Name Spieler 2");
+        textName2.setPrefWidth(110);
+
+        root.getChildren().add(textName1);
+        root.getChildren().add(textName2);
+        root.getChildren().add(slider);
+        root.getChildren().add(text);
+
+        Scene scene = new Scene(root, 650, 850);
+
+        primaryStage.setTitle("HauptMenü");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
