@@ -25,7 +25,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setTitle("Bubble - Chart");
+        primaryStage.setTitle("Pie - Chart");
 
         PieChart pieChart = new PieChart(FXCollections.observableArrayList(
            new PieChart.Data("Wandern",22),
@@ -33,7 +33,7 @@ public class Main extends Application{
            new PieChart.Data("Kraftsport",33)
         ));
 
-        pieChart.setId("Wasn das");
+        pieChart.setId("Sport1");
         pieChart.setTitle("Sportarten");
 
         primaryStage.setScene(new Scene(pieChart));
