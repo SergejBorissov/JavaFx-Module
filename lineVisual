@@ -1,0 +1,41 @@
+/**
+ * @author : Sergej Borissov
+ * @domain: creative Coding
+ *
+ */
+public class Main extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        Pane leinwand = new Pane();
+        RotateTransition rotateTransition = new RotateTransition();
+        Scene scene = new Scene(leinwand, 1200,700);
+        Rectangle rectangle = new Rectangle();
+
+
+        for(int i = 0; i < 300; i++){
+            Line line1 = new Line(30*i,i * 10,i * 70,400);
+
+
+            rotateTransition.setNode(line1);
+            rotateTransition.setByAngle(360);
+            rotateTransition.setAutoReverse(false);
+            rotateTransition.setDuration(Duration.seconds(3));
+            leinwand.getChildren().addAll(line1);
+            rotateTransition.play();
+        }
+
+        for(int i = 0; i < 500; i++){
+            Line line3 = new Line(55*i,i * 34,i * 10,500);
+            line3.setStroke(Color.LIGHTBLUE);
+            leinwand.getChildren().add(line3);
+        }
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+}
