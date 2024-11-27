@@ -1,0 +1,34 @@
+package de.borissov;
+
+import javafx.scene.chart.*;
+
+public class LineChartFactory {
+
+    CategoryAxis xAxis = new CategoryAxis();
+    NumberAxis yAxis = new NumberAxis();
+
+    LineChart<String, Number> chart = new LineChart<String, Number>(xAxis, yAxis);
+
+    XYChart.Series<String, Number> series = new XYChart.Series<>();
+    XYChart.Data<String, Number> data1 = new XYChart.Data<>("A", 1);
+    XYChart.Data<String, Number> data2 = new XYChart.Data<>("B", 1);
+    XYChart.Data<String, Number> data3 = new XYChart.Data<>("C", 2);
+    XYChart.Data<String, Number> data4 = new XYChart.Data<>("D", 3);
+    XYChart.Data<String, Number> data5 = new XYChart.Data<>("E", 5);
+    XYChart.Data<String, Number> data6 = new XYChart.Data<>("F", 8);
+    XYChart.Data<String, Number> data7 = new XYChart.Data<>("G", 13);
+    XYChart.Data<String, Number> data8 = new XYChart.Data<>("H", 21);
+    XYChart.Data<String, Number> data9 = new XYChart.Data<>("I", 34);
+    XYChart.Data<String, Number> data10 = new XYChart.Data<>("J", 55);
+    XYChart.Data<String, Number> data11 = new XYChart.Data<>("K", 89);
+
+    public LineChart createChart()
+    {
+        series.getData().addAll(data1, data2, data3, data4, data5, data6,
+                data7, data8,data9,data10, data11);
+        series.setName("Orphische fibonacci Wolke");
+        chart.getData().add(series);
+        return chart;
+
+    }
+}
