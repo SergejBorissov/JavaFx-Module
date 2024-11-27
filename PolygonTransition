@@ -1,0 +1,54 @@
+package de.borissov;
+
+import javafx.animation.RotateTransition;
+
+/**
+ * @author Sergej Borissov
+ *
+ * Polygon rotation
+ * Beim drücken auf das Image,
+ * reagiert es wie ein Button
+ */
+
+public class Main extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws FileNotFoundException {
+
+        Polygon polygon = new Polygon();
+        Button button = new Button("dreh");
+
+        polygon.getPoints().addAll(new Double[]{
+                200.0, 50.0,
+                400.0, 50.0,
+                450.0, 150.0,
+                400.0, 250.0,
+                200.0, 250.0,
+                150.0, 150.0,
+        });
+
+        polygon.setFill(Color.BLUE);
+
+        button.setOnAction(event -> {
+            RotateTransition rotateTransition = new RotateTransition();
+            rotateTransition.setDuration(Duration.millis(1000));
+            rotateTransition.setNode(polygon);
+            rotateTransition.setByAngle(360);
+            rotateTransition.setAutoReverse(false);
+            rotateTransition.play();
+        });
+
+
+        Group root = new Group(polygon, button);
+
+        Scene scene = new Scene(root,600,300);
+        primaryStage.setTitle("Rotate transition");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+    }
+}
